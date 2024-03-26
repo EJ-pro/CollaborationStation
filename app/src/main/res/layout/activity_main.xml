@@ -23,7 +23,6 @@
         android:background="@color/white"
         app:itemBackground="@color/white"
         app:itemIconTint="#5B83B4"
-        app:itemTextsize=""
         app:itemTextColor="#5B83B4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
