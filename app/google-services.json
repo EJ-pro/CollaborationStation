@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "936375340993",
+    "project_id": "collaborationstation-leek",
+    "storage_bucket": "collaborationstation-leek.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936375340993:android:537fe758d5b81d44272940",
+        "android_client_info": {
+          "package_name": "com.example.collaborationstation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwfU2Pr3Xt58ywT4XEJ8wuGlP_iTS7EDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
