@@ -8,6 +8,10 @@ android {
     namespace = "com.example.collaborationstation"
     compileSdk = 34
 
+    buildFeatures { // 뷰바인딩
+        viewBinding = true
+    }
+    
     defaultConfig {
         applicationId = "com.example.collaborationstation"
         minSdk = 33
@@ -52,6 +56,7 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.storage)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

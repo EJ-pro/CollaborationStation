@@ -22,7 +22,7 @@ class Fragment_Team_Matching : Fragment() {
 
         tabLayout.addTab(tabLayout.newTab().setText("대회"))
         tabLayout.addTab(tabLayout.newTab().setText("컨퍼런스"))
-        tabLayout.addTab(tabLayout.newTab().setText("즐겨찾기"))
+        tabLayout.addTab(tabLayout.newTab().setText("팀매칭"))
 
         val adapter = Team_Matching_Adapter(childFragmentManager, tabLayout.tabCount)
         viewPager.adapter = adapter
