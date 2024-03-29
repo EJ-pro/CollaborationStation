@@ -68,7 +68,7 @@ class Login : AppCompatActivity() {
                     if (task.isSuccessful) {
                         Toast.makeText(this, "로그인에 성공했습니다!", Toast.LENGTH_SHORT).show()
 
-                        val intent = Intent(this, Login::class.java)
+                        val intent = Intent(this, ChatMainActivity::class.java)
                         startActivity(intent)
                     }
                     else {
