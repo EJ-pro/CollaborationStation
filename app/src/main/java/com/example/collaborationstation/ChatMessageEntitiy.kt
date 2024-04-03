@@ -1,8 +1,11 @@
 package com.example.collaborationstation
 
 data class ChatMessageEntity(
-    var name: String?,
-    var uid: String?,
-    var content: String?,
-    var timestamp: String?
-)
+    var name: String? = null,
+    var uid: String? = null,
+    var content: String? = null,
+    var timestamp: String? = null
+) {
+    // 매개변수 없는 기본 생성자를 추가
+    constructor() : this("", "", "", "")
+}

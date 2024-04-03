@@ -1,7 +1,5 @@
 package com.example.collaborationstation
 
-import com.example.collaborationstation.ChatMessageEntity
-
 sealed class ChatMainState {
 
     object UnInitialized: ChatMainState()

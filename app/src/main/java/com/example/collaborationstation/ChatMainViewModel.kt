@@ -25,21 +25,31 @@ class ChatMainViewModel : ViewModel() {
     /*
     * 채팅 메세지 읽어오기
     * */
-    fun fetchReadData(): Job = viewModelScope.launch {
+    fun fetchReadData(lastMessageUid: String? = null): Job = viewModelScope.launch {
         try {
             _chatMainLiveData.postValue(ChatMainState.Loading)
-            val response: MutableList<ChatMessageEntity> = mutableListOf()
+
             val database = Firebase.database(CommonUtil.CHAT_DB_URL)
-            CommonUtil.CHAT_REF = database.getReference(CommonUtil.CHAT_PATH).child(CommonUtil.CHAT_PATH_CHILD)
-            CommonUtil.CHAT_REF.addValueEventListener(object : ValueEventListener {
+            val chatRef = database.getReference(CommonUtil.CHAT_PATH).child(CommonUtil.CHAT_PATH_CHILD)
+
+            val query = if (lastMessageUid != null) {
+                chatRef.orderByKey().startAt(lastMessageUid)
+            } else {
+                chatRef
+            }
+
+            query.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    for ((index, snapshot) in dataSnapshot.children.withIndex()) {
-                        val chatItem = snapshot.value as HashMap<String, String>
-                        val msgItem = ChatMessageEntity(chatItem["name"], chatItem["uid"], chatItem["content"], chatItem["timestamp"])
-                        response.add(index, msgItem)
+                    val response: MutableList<ChatMessageEntity> = mutableListOf()
+                    for (snapshot in dataSnapshot.children) {
+                        val chatItem = snapshot.getValue(ChatMessageEntity::class.java)
+                        chatItem?.let {
+                            response.add(it)
+                        }
                     }
                     _chatMainLiveData.postValue(ChatMainState.Success(response))
                 }
+
                 override fun onCancelled(error: DatabaseError) {
                     _chatMainLiveData.postValue(ChatMainState.Error)
                 }
@@ -48,6 +58,7 @@ class ChatMainViewModel : ViewModel() {
             _chatMainLiveData.postValue(ChatMainState.Error)
         }
     }
+
 
     /*
     * 채팅 메세지 쓰기

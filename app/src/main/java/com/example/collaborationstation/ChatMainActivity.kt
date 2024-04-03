@@ -32,8 +32,14 @@ class ChatMainActivity : AppCompatActivity() {
         binding = ActivityChatMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initView()
-        observeData()
+        // 저장된 사용자 이름이 있는지 확인하고, 있으면 자동으로 로그인
+        if (CommonUtil.userName.isNullOrEmpty()) {
+            showLoginDialog()
+        } else {
+            // 저장된 사용자 이름이 있으면 해당 이름으로 대화를 시작
+            initView()
+            observeData()
+        }
     }
 
     private fun initView() {
@@ -167,7 +173,6 @@ class ChatMainActivity : AppCompatActivity() {
     * 로그인하는 Dialog 띄우기
     * */
     private fun showLoginDialog() {
-
         val dialogViewBinding = DialogLoginBinding.inflate(layoutInflater)
         val builder = AlertDialog.Builder(this)
         val dialog = builder.setView(dialogViewBinding.root).create()
@@ -175,10 +180,11 @@ class ChatMainActivity : AppCompatActivity() {
         dialogViewBinding.btnConfirm.setOnClickListener {
             CommonUtil.userName = dialogViewBinding.etName.text.toString()
             initView()
+            observeData() // 로그인 후에 데이터를 가져오도록 변경
             dialog.dismiss()
         }
         dialogViewBinding.btnCancel.setOnClickListener {
-            dialog.dismiss()
+            finish() // 로그인을 취소하면 앱을 종료
         }
 
         dialog.show()
