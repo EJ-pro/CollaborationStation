@@ -3,8 +3,12 @@ package com.example.collaborationstation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.storage.FirebaseStorage
 
 class ContestAdapter(private val contestList: List<Contest>) : RecyclerView.Adapter<ContestAdapter.ContestViewHolder>() {
 
@@ -16,6 +20,7 @@ class ContestAdapter(private val contestList: List<Contest>) : RecyclerView.Adap
         val scheduleStartTextView: TextView = itemView.findViewById(R.id.scheduleStartTextView)
         val locationTextView: TextView = itemView.findViewById(R.id.locationTextView)
         val eligibilityTextView: TextView = itemView.findViewById(R.id.eligibilityTextView)
+        val imageView: ImageView = itemView.findViewById(R.id.imageView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContestViewHolder {
@@ -32,7 +37,24 @@ class ContestAdapter(private val contestList: List<Contest>) : RecyclerView.Adap
         holder.scheduleStartTextView.text = currentContest.scheduleStart
         holder.locationTextView.text = currentContest.location
         holder.eligibilityTextView.text = currentContest.eligibility
+
+        val storageReference = FirebaseStorage.getInstance().reference.child("대회/게임 개발 대회.jpg")
+
+        storageReference.downloadUrl.addOnSuccessListener { uri ->
+            val imageUrl = uri.toString()
+
+            // Glide를 사용하여 이미지뷰에 이미지 설정
+            Glide.with(holder.itemView.context)
+                .load(imageUrl)
+                .placeholder(R.drawable.ic_item1) // 이미지를 로드하는 동안 보여줄 이미지
+                .error(R.drawable.ic_launcher_bear) // 이미지 로드 실패 시 보여줄 이미지
+                .into(holder.imageView)
+        }.addOnFailureListener { exception ->
+            // 이미지 다운로드 URL을 가져오는데 실패한 경우 처리
+        }
+
     }
+
 
     override fun getItemCount() = contestList.size
 }

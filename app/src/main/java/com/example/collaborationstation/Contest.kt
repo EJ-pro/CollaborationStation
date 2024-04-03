@@ -7,5 +7,6 @@ data class Contest(
     val scheduleDeadline: String,
     val scheduleStart: String,
     val location: String,
-    val eligibility: String
+    val eligibility: String,
+    val imageReference: String
 )

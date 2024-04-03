@@ -1,13 +1,16 @@
 package com.example.collaborationstation
 
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.getField
 
 class Fragment_Team_Matching_Tab1 : Fragment() {
 
@@ -40,7 +43,8 @@ class Fragment_Team_Matching_Tab1 : Fragment() {
                         document.getString("일정 마감") ?: "",
                         document.getString("일정 시작") ?: "",
                         document.getString("장소") ?: "",
-                        document.getString("참가 자격") ?: ""
+                        document.getString("참가 자격") ?: "",
+                        document.getString("imageReference") ?: ""
                     )
                     contestList.add(contest)
                 }
