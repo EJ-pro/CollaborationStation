@@ -31,6 +31,9 @@ class Fragment_Team_Matching_Tab1 : Fragment() {
         adapter = ContestAdapter(contestList)
         recyclerView.adapter = adapter // 어댑터 설정
 
+        // 기존 데이터를 초기화
+        contestList.clear()
+
         // Firestore에서 데이터 가져오기
         db.collection("tab1")
             .get()
