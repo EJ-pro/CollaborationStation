@@ -38,21 +38,30 @@ class ContestAdapter(private val contestList: List<Contest>) : RecyclerView.Adap
         holder.locationTextView.text = currentContest.location
         holder.eligibilityTextView.text = currentContest.eligibility
 
-        val storageReference = FirebaseStorage.getInstance().reference.child("대회/게임 개발 대회.jpg")
+        val imageReference = currentContest.imageReference
+        if (!imageReference.isNullOrEmpty()) {
+            // Firebase Storage에서 이미지 다운로드 URL을 가져오고 Glide를 사용하여 이미지뷰에 이미지 설정
+            val storageReference = FirebaseStorage.getInstance().reference.child(imageReference)
+            storageReference.downloadUrl.addOnSuccessListener { uri ->
+                val imageUrl = uri.toString()
 
-        storageReference.downloadUrl.addOnSuccessListener { uri ->
-            val imageUrl = uri.toString()
-
-            // Glide를 사용하여 이미지뷰에 이미지 설정
+                // Glide를 사용하여 이미지뷰에 이미지 설정
+                Glide.with(holder.itemView.context)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.ic_item1) // 이미지를 로드하는 동안 보여줄 이미지
+                    .error(R.drawable.ic_launcher_bear) // 이미지 로드 실패 시 보여줄 이미지
+                    .into(holder.imageView)
+            }.addOnFailureListener { exception ->
+                // 이미지 다운로드 URL을 가져오는데 실패한 경우 처리
+            }
+        } else {
+            // 이미지 참조가 없는 경우 기본 이미지 설정
             Glide.with(holder.itemView.context)
-                .load(imageUrl)
-                .placeholder(R.drawable.ic_item1) // 이미지를 로드하는 동안 보여줄 이미지
-                .error(R.drawable.ic_launcher_bear) // 이미지 로드 실패 시 보여줄 이미지
+                .load(R.drawable.logo)
+                .placeholder(R.drawable.ic_item1)
+                .error(R.drawable.logo)
                 .into(holder.imageView)
-        }.addOnFailureListener { exception ->
-            // 이미지 다운로드 URL을 가져오는데 실패한 경우 처리
         }
-
     }
 
 
