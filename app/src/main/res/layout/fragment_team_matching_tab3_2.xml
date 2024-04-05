@@ -4,20 +4,30 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="제목을 작성하세요"
+        android:padding="16dp"
+        android:layout_margin="16dp"
+        android:background="@android:color/darker_gray"
+        android:textColor="@android:color/black" />
+    <EditText
+        android:id="@+id/editText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="글을 작성하세요"
         android:padding="16dp"
         android:layout_margin="16dp"
+        android:layout_below="@id/editText1"
         android:background="@android:color/darker_gray"
         android:textColor="@android:color/black" />
-
+ 5
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editText"
+        android:layout_below="@id/editText2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="저장" />

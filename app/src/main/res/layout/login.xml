@@ -1,71 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical"
+    android:background="@color/black"
+    android:paddingLeft="35dp"
+    android:paddingRight="35dp"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/aplication_name"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:id="@+id/aplication_name1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Todo list"
+        android:text="🟠새로운 시작,"
         android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/aplication_name2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Collaboration"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/aplication_name3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Station"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         android:textStyle="normal" />
 
     <EditText
         android:id="@+id/userId"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="100dp"
-        android:hint="아이디를 입력해주세요"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="20dp"
+        android:hint="아이디"
+        android:textSize="14sp"
+        android:textColorHint="@color/white"
         android:maxLength="50"
-        android:textColor="@color/black"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aplication_name" />
+        android:textColor="@color/white"
+        android:background="@drawable/login_rounded_gradient_background" />
 
     <EditText
         android:id="@+id/userPw"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:hint="비밀번호를 입력해주세요"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="20dp"
+        android:hint="비밀번호"
+        android:textSize="14sp"
+        android:textColorHint="@color/white"
         android:maxLength="50"
         android:textColor="@color/black"
         android:inputType="textPassword"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userId" />
-
-    <Button
-        android:id="@+id/createBtn"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="60dp"
-        android:text="회원가입"
-        android:textColor="@color/black"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userPw" />
+        android:background="@drawable/login_rounded_gradient_background" />
 
     <Button
         android:id="@+id/loginBtn"
-        android:layout_width="120dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:text="로그인"
-        app:layout_constraintLeft_toRightOf="@id/createBtn"
-        app:layout_constraintTop_toBottomOf="@id/userPw" />
+        android:textSize="14sp"
+        android:textColor="@color/black" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/createBtn1"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="아이디 찾기"
+            android:textSize="10sp"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/createBtn2"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="비밀번호 찾기"
+            android:textSize="10sp"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/createBtn3"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="회원가입"
+            android:textSize="10sp"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+    <View
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="SNS 계정으로 로그인"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:background="@android:color/darker_gray"/>
+    </LinearLayout>
+</LinearLayout>

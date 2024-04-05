@@ -37,7 +37,7 @@ class Login : AppCompatActivity() {
 
 
         //회원가입 버튼
-        val create: Button = binding.createBtn
+        val create: Button = binding.createBtn3
 
         //로그인 폼
         val login: Button = binding.loginBtn
