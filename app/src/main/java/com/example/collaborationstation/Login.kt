@@ -1,80 +1,72 @@
 package com.example.collaborationstation
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.collaborationstation.databinding.ActivityMainBinding
 import com.example.collaborationstation.databinding.LoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.newFixedThreadPoolContext
 
 class Login : AppCompatActivity() {
     private lateinit var binding: LoginBinding
-    private var db_data = ArrayList<String>()
     private lateinit var auth: FirebaseAuth
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = LoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var id: EditText = binding.userId
-        var pw: EditText = binding.userPw
+        // SharedPreferences 초기화
+        sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
 
-
-        //회원가입 버튼
-        val create: Button = binding.createBtn3
-
-        //로그인 폼
-        val login: Button = binding.loginBtn
-
-        //Firebase 연결
+        // Firebase 초기화
         auth = Firebase.auth
 
-        create.setOnClickListener() {
+        // View 요소 가져오기
+        val id: EditText = binding.userId
+        val pw: EditText = binding.userPw
+        val loginButton: Button = binding.loginBtn
 
-            val intent = Intent(this, Create::class.java)
-            startActivity(intent)
-        }
 
-        login.setOnClickListener() {
+        // 로그인 버튼 클릭 리스너 설정
+        loginButton.setOnClickListener {
+            val inputId = id.text.toString()
+            val inputPw = pw.text.toString()
 
-            login(id.text.toString(), pw.text.toString())
+            if (inputId.isEmpty() || inputPw.isEmpty()) {
+                Toast.makeText(this, "빈 값을 입력하셨습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                login(inputId, inputPw)
+            }
         }
     }
 
-
     private fun login(id: String, pw: String) {
-
-        if (id.isNullOrEmpty() || pw.isNullOrEmpty()) {
-            Toast.makeText(this, "빈 값을 입력하셨습니다.", Toast.LENGTH_SHORT).show()
-        } else {
-            auth.signInWithEmailAndPassword(id, pw)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(this, "로그인에 성공했습니다!", Toast.LENGTH_SHORT).show()
-
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
+        auth.signInWithEmailAndPassword(id, pw)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // 로그인 성공 시 SharedPreferences에 저장
+                    with(sharedPreferences.edit()) {
+                        putString("username", id)
+                        putString("password", pw)
+                        putBoolean("isLoggedIn", true)
+                        apply()
                     }
-                    else {
-                        Toast.makeText(this, "아이디와 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
-                    }
+
+                    Toast.makeText(this, "로그인에 성공했습니다!", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(this, "아이디와 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
                 }
-        }
+            }
     }
 }
