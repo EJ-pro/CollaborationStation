@@ -33,6 +33,9 @@ class Login : AppCompatActivity() {
         val id: EditText = binding.userId
         val pw: EditText = binding.userPw
         val loginButton: Button = binding.loginBtn
+        val createBtn1 : Button = binding.createBtn1
+        val createBtn2 : Button = binding.createBtn2
+        val createBtn3 : Button = binding.createBtn3
 
 
         // 로그인 버튼 클릭 리스너 설정
@@ -45,6 +48,22 @@ class Login : AppCompatActivity() {
             } else {
                 login(inputId, inputPw)
             }
+        }
+        createBtn1.setOnClickListener {
+            val intent = Intent(this, Create::class.java)
+            startActivity(intent)
+        }
+
+        // 비밀번호 찾기 버튼 클릭 시
+        createBtn2.setOnClickListener {
+            val intent = Intent(this, Create::class.java)
+            startActivity(intent)
+        }
+
+        // 회원가입 버튼 클릭 시
+        createBtn3.setOnClickListener {
+            val intent = Intent(this, Create::class.java)
+            startActivity(intent)
         }
     }
 
