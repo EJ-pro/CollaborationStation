@@ -28,7 +28,7 @@ class Login : AppCompatActivity() {
 
         // Firebase 초기화
         auth = Firebase.auth
-
+        //push test
         // View 요소 가져오기
         val id: EditText = binding.userId
         val pw: EditText = binding.userPw
