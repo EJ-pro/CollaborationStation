@@ -53,6 +53,11 @@
             android:name=".Login_Pass_word_Find"
             android:exported="true">
         </activity>
+
+        <activity
+            android:name=".ContestDetailActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
