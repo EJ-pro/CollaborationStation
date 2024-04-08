@@ -50,13 +50,13 @@ class Login : AppCompatActivity() {
             }
         }
         createBtn1.setOnClickListener {
-            val intent = Intent(this, Create::class.java)
+            val intent = Intent(this, Login_ID_Find::class.java)
             startActivity(intent)
         }
 
         // 비밀번호 찾기 버튼 클릭 시
         createBtn2.setOnClickListener {
-            val intent = Intent(this, Create::class.java)
+            val intent = Intent(this, Login_Pass_word_Find::class.java)
             startActivity(intent)
         }
 
