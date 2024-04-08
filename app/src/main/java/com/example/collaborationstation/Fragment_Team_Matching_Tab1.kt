@@ -47,7 +47,8 @@ class Fragment_Team_Matching_Tab1 : Fragment() {
                         document.getString("일정 시작") ?: "",
                         document.getString("장소") ?: "",
                         document.getString("참가 자격") ?: "",
-                        document.getString("이미지") ?: ""
+                        document.getString("이미지") ?: "",
+                        document.getString("url") ?:""
                     )
                     contestList.add(contest)
                 }
@@ -69,6 +70,7 @@ class Fragment_Team_Matching_Tab1 : Fragment() {
                         val intent = Intent(activity, ContestDetailActivity::class.java)
                         // 선택한 대회의 이름을 전달합니다.
                         intent.putExtra("contest_name", selectedContest.name)
+                        intent.putExtra("contest_url", selectedContest.url)
 
                         // ContestDetailActivity를 시작합니다.
                         startActivity(intent)

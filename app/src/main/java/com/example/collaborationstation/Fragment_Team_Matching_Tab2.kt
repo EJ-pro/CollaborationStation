@@ -44,7 +44,8 @@ class Fragment_Team_Matching_Tab2 : Fragment() {
                         document.getString("일정 시작") ?: "",
                         document.getString("장소") ?: "",
                         document.getString("참가 자격") ?: "",
-                        document.getString("이미지") ?: ""
+                        document.getString("이미지") ?: "",
+                        document.getString("url") ?: ""
                     )
                     contestList.add(contest)
                 }

@@ -35,5 +35,11 @@
         android:textSize="16sp" />
 
     <!-- 기타 대회 세부 정보를 나타내는 요소들을 추가할 수 있습니다. -->
+    <Button
+        android:id="@+id/url_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewContestDescription"
+        android:text="웹 페이지 이동"/>
 
 </RelativeLayout>

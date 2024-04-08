@@ -8,5 +8,6 @@ data class Contest(
     val scheduleStart: String,
     val location: String,
     val eligibility: String,
-    val imageReference: String
+    val imageReference: String,
+    val url: String
 )
