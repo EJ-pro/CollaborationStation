@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.collaborationstation.databinding.CreateBinding
@@ -35,6 +36,7 @@ class Create : AppCompatActivity() {
         val createButton = binding.createBtn
         val checkDuplicateEmailButton = binding.checkDuplicateEmailBtn
         val checkDuplicateNicknameButton = binding.checkDuplicateNicknameBtn
+        val checkBox = binding.checkBox
 
         auth = Firebase.auth
 
@@ -78,6 +80,43 @@ class Create : AppCompatActivity() {
             // 이메일과 닉네임이 중복 확인되었을 때 회원가입 진행
             createAccount(email, password, nickname)
         }
+        createButton.setOnClickListener {
+
+            val scrollView: ScrollView = findViewById(R.id.scrollView)
+
+            if (emailEditText.hasFocus() || passwordEditText.hasFocus() || nicknameEditText.hasFocus()) {
+                // 스크롤뷰를 맨 아래로 스크롤
+                scrollView.postDelayed({
+                    scrollView.fullScroll(ScrollView.FOCUS_DOWN)
+                }, 100)
+            }
+
+            val email = emailEditText.text.toString()
+            val password = passwordEditText.text.toString()
+            val nickname = nicknameEditText.text.toString()
+
+            // 체크박스가 체크되었는지 확인
+            if (!checkBox.isChecked) {
+                Toast.makeText(this, "약관에 동의해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // 이메일이 확인되었는지 확인
+            if (!isEmailChecked) {
+                Toast.makeText(this, "이메일 확인을 해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // 닉네임이 확인되었는지 확인
+            if (!isNicknameChecked) {
+                Toast.makeText(this, "닉네임 확인을 해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // 등록 진행
+            createAccount(email, password, nickname)
+        }
+
     }
 
     private fun checkDuplicateEmail(email: String) {
