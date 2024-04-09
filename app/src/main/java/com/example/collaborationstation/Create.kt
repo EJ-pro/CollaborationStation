@@ -37,9 +37,12 @@ class Create : AppCompatActivity() {
         val checkDuplicateEmailButton = binding.checkDuplicateEmailBtn
         val checkDuplicateNicknameButton = binding.checkDuplicateNicknameBtn
         val checkBox = binding.checkBox
-
+        val backButton = binding.createBack
         auth = Firebase.auth
-
+        backButton.setOnClickListener{
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+        }
         checkDuplicateEmailButton.setOnClickListener {
             val email = emailEditText.text.toString()
 
