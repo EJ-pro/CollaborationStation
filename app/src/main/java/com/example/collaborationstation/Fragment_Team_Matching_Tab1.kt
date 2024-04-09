@@ -71,6 +71,7 @@ class Fragment_Team_Matching_Tab1 : Fragment() {
                         // 선택한 대회의 이름을 전달합니다.
                         intent.putExtra("contest_name", selectedContest.name)
                         intent.putExtra("contest_url", selectedContest.url)
+                        intent.putExtra("contest_description", selectedContest.description)
 
                         // ContestDetailActivity를 시작합니다.
                         startActivity(intent)
