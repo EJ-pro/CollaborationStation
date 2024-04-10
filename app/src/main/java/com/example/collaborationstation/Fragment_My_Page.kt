@@ -42,7 +42,9 @@ class Fragment_My_Page  : Fragment() {
             startActivity(intent)
             activity?.finish() // 현재 화면 종료
         }
+        binding.push.setOnClickListener {
 
+        }
         return view
     }
 

@@ -2,6 +2,7 @@ package com.example.collaborationstation
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -17,6 +18,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
+@Suppress("DEPRECATION")
 class Create : AppCompatActivity() {
     private lateinit var binding: CreateBinding
     private lateinit var auth: FirebaseAuth
@@ -47,7 +49,15 @@ class Create : AppCompatActivity() {
             val email = emailEditText.text.toString()
 
             if (email.isBlank()) {
-                Toast.makeText(this, "이메일을 입력하세요.", Toast.LENGTH_SHORT).show()
+                val toast = Toast.makeText(this, "이메일을 입력하세요.", Toast.LENGTH_SHORT)
+
+                toast.show()
+
+                Handler().postDelayed(Runnable {
+                    run(){
+                        toast.cancel()
+                    }
+                },1000)
             } else {
                 checkDuplicateEmail(email)
             }
@@ -57,7 +67,15 @@ class Create : AppCompatActivity() {
             val nickname = nicknameEditText.text.toString()
 
             if (nickname.isBlank()) {
-                Toast.makeText(this, "닉네임을 입력하세요.", Toast.LENGTH_SHORT).show()
+                val toast = Toast.makeText(this, "닉네임을 입력하세요.", Toast.LENGTH_SHORT)
+
+                toast.show()
+
+                Handler().postDelayed(Runnable {
+                    run(){
+                        toast.cancel()
+                    }
+                },1000)
             } else {
                 checkDuplicateNickname(nickname)
             }
