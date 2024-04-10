@@ -16,6 +16,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 @Suppress("DEPRECATION")
@@ -193,21 +194,20 @@ class Create : AppCompatActivity() {
                     // 회원가입 성공
                     val user = auth.currentUser
                     if (user != null) {
-                        val database = Firebase.database
-                        val usersRef = database.getReference("users")
-
+                        val db = Firebase.firestore
                         val userInfo = hashMapOf(
                             "email" to email,
                             "nickname" to nickname
                         )
 
-                        usersRef.child(user.uid).setValue(userInfo)
+                        db.collection("users").document(user.uid)
+                            .set(userInfo)
                             .addOnSuccessListener {
                                 Toast.makeText(this, "회원가입에 성공하였습니다.", Toast.LENGTH_SHORT).show()
                                 finish()
                             }
-                            .addOnFailureListener {
-                                Log.e(TAG, "Error adding user info to database", it)
+                            .addOnFailureListener { e ->
+                                Log.e(TAG, "Error adding user info to Firestore", e)
                                 Toast.makeText(this, "회원가입 중 오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
                             }
                     }
@@ -218,6 +218,7 @@ class Create : AppCompatActivity() {
                 }
             }
     }
+
 
     companion object {
         private const val TAG = "CreateActivity"

@@ -59,6 +59,11 @@
             android:name=".ContestDetailActivity"
             android:exported="true">
         </activity>
+
+        <activity
+            android:name=".Fragment_Team_Matching_Tab3_Post"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

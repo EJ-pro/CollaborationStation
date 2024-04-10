@@ -22,7 +22,7 @@
         android:layout_below="@id/editText1"
         android:background="@android:color/darker_gray"
         android:textColor="@android:color/black" />
- 5
+
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
