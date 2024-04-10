@@ -1,3 +1,3 @@
 package com.example.collaborationstation
 
-data class Post(val title: String, val content: String)
+data class Post(val title: String, val content: String, val username: String)

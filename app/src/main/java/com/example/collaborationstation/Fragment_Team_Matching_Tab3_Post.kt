@@ -1,5 +1,6 @@
 package com.example.collaborationstation
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -54,10 +55,13 @@ class Fragment_Team_Matching_Tab3_Post : AppCompatActivity() {
                                 .addOnSuccessListener {
                                     val toast = Toast.makeText(this, "글 등록에 성공하였습니다", Toast.LENGTH_SHORT)
                                     toast.show()
+                                    val intent = Intent(this@Fragment_Team_Matching_Tab3_Post, Fragment_Team_Matching_Tab3::class.java)
+                                    startActivity(intent)
 
                                     Handler().postDelayed({
                                         toast.cancel()
                                     }, 1000)
+
                                 }
                                 .addOnFailureListener {
                                     val toast = Toast.makeText(this, "글 등록에 실패하였습니다", Toast.LENGTH_SHORT)
