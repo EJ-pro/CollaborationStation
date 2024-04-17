@@ -8,7 +8,7 @@ android {
     namespace = "com.example.collaborationstation"
     compileSdk = 34
 
-    buildFeatures { // 뷰바인딩
+    buildFeatures {
         viewBinding = true
     }
     
